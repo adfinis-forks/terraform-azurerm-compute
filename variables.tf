@@ -11,6 +11,12 @@ variable "vnet_subnet_id" {
   description = "The subnet id of the virtual network where the virtual machines will reside."
 }
 
+variable "vnet_subnet_prefix" {
+  description = "The subnet id of the virtual network where the virtual machines will reside."
+  # backwards compatibility
+  default = ""
+}
+
 variable "security_group_id" {
   description = "The security group id to be associated with the network interface. Subnet-NSG-Association must be done outside this module"
 }
@@ -173,3 +179,8 @@ variable "enable_accelerated_networking" {
   default     = "false"
 }
 
+variable "auto_assign_static_ip" {
+  type        = bool
+  description = "Automatically assigns a static ip address according to the instance number starting at 10. (Example: count: 0, vnet_subnet_prefix 10.1.0.0/24 --> 10.1.0.10)"
+  default     = false
+}

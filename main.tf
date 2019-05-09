@@ -198,7 +198,8 @@ resource "azurerm_network_interface" "vm" {
   ip_configuration {
     name                          = "ipconfig${count.index}"
     subnet_id                     = var.vnet_subnet_id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address            = var.auto_assign_static_ip ? cidrhost(var.vnet_subnet_prefix, count.index+10) : ""
+    private_ip_address_allocation = var.auto_assign_static_ip ? "Static" : "Dynamic"
     public_ip_address_id          = length(azurerm_public_ip.vm.*.id) > 0 ? element(concat(azurerm_public_ip.vm.*.id, [""]), count.index) : ""
   }
 
