@@ -30,6 +30,11 @@ variable "ssh_key" {
   default     = "~/.ssh/id_rsa.pub"
 }
 
+variable "ssh_key_data" {
+  description = "SSH Public Key data to be used for ssh access to the VM."
+  default     = ""
+}
+
 variable "remote_port" {
   description = "Remote tcp port to be used for access to the vms created via the nsg applied to the nics."
   default     = ""
